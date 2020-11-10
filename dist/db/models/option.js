@@ -8,38 +8,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Quiz = void 0;
+exports.Option = void 0;
 const typeorm_1 = require("typeorm");
-const question_1 = require("./question");
-let Quiz = class Quiz {
+const question_1 = __importDefault(require("./question"));
+let Option = class Option {
+    constructor() {
+        this.correct = false;
+    }
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Quiz.prototype, "id", void 0);
+], Option.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column({ length: 15 }),
     __metadata("design:type", String)
-], Quiz.prototype, "name", void 0);
-__decorate([
-    typeorm_1.Column({ length: 100 }),
-    __metadata("design:type", String)
-], Quiz.prototype, "description", void 0);
+], Option.prototype, "text", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", String)
-], Quiz.prototype, "author", void 0);
+    __metadata("design:type", Boolean)
+], Option.prototype, "correct", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Date)
-], Quiz.prototype, "created", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => question_1.Question, question => question.quiz, { eager: true }),
-    __metadata("design:type", Array)
-], Quiz.prototype, "questions", void 0);
-Quiz = __decorate([
+    typeorm_1.ManyToOne(() => question_1.default, question => question.options),
+    __metadata("design:type", question_1.default)
+], Option.prototype, "question", void 0);
+Option = __decorate([
     typeorm_1.Entity()
-], Quiz);
-exports.Quiz = Quiz;
-exports.default = Quiz;
+], Option);
+exports.Option = Option;
+exports.default = Option;

@@ -4,14 +4,14 @@
   "description": "",
   "scripts": {
     "build": "webpack --mode production",
-    "serv": "node dist/Routes/routes.js",
+    "serv": "nodemon dist/Routes/routes.js",
     "servWatch": "tsc -w",
     "start": "concurrently --kill-others-on-fail \"npm run serv\"  \"npm run build\" \"npm run servWatch\""
   },
   "nodemonConfig": {
     "ignore": [
-	  "dist/public",
-	  "src/**/*"
+      "dist/public",
+      "src/**/*"
     ],
     "delay": "1000"
   },
@@ -54,7 +54,9 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "react-router-dom": "^5.2.0",
     "reactn": "^2.2.7",
     "style-loader": "^0.23.0",
     "ts-node": "^9.0.0",

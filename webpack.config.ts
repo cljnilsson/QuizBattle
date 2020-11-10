@@ -49,7 +49,7 @@ const config: webpack.Configuration = {
         ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: [".js", ".tsx", ".ts"],
     },
     output: {
 		path: path.resolve(__dirname, "dist/public"),

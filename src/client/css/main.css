@@ -6,6 +6,10 @@ ul {
     list-style: none;
 }
 
+hr {
+	border-color: white;
+}
+
 h1, h2, h3 {
     font-weight: bold;
 }
@@ -20,6 +24,7 @@ nav {
 body {
 	background-image: url("/bg.png");
 	background-size: cover;
+	color: white;
 }
 
 footer {
@@ -69,10 +74,12 @@ footer {
 
 .card {
 	transition: transform .1s;
+	width: 250px;
+	color: black;
 }
 
 .card:hover {
-	transform: scale(1.5);
+	transform: scale(1.25);
 	z-index: 10000 !important;
 }
 
@@ -93,52 +100,10 @@ footer {
 	}
 }
 
-.chat {
-    height: 500px;
-    overflow-y: auto;
-}
-
-.miniChat {
-    height: 150px;
-    overflow-y: auto;
-}
-
-.avatarSmall, .avatar {
-    border-radius: 8px;
-}
-
-.avatar {
-    width: 32px;
-    height: 32px;
-}
-
-.avatarSmall {
-    width: 16px;
-    height: 16px;
-}
-
-.member {
-    color: paleturquoise;
-}
-
-.paleturquoise {
-    color: paleturquoise;
-}
-
-.red {
-	color: red;
-}
-
-.white {
-	color: white;
-}
-
-.green {
-	color: lawngreen;
-}
-
-.orange {
-	color: orange;
+.container {
+	background-color: rgba(50, 50, 50, 0.5);
+	min-height: 900px;
+	padding-top: 15px;
 }
 
 .search-box {
@@ -206,21 +171,6 @@ footer {
 	right: 100px;
 }
 
-#userCorner {
-	user-select: none;
-}
-
-#navbarBrand {
-	cursor: pointer;
-}
-
-#lobbySearch {
-	margin-bottom: 1rem;
-}
-
-#lobbyQuit {
-	margin-bottom: 1rem;
-}
 
 @media only screen and (max-width: 768px) {
 	/* For mobile phones: */

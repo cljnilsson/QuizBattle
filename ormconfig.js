@@ -3,13 +3,18 @@ module.exports =  {
 	"host": "localhost",
 	"port": 3306,
 	"username": "root",
+	"database": "QuizBattle",
 	"password": "",
 	"synchronize": true,
+	"cache": true,
 	"logging": false,
 	"entities": [
-	   "src/server/db/models/*.ts"
+	   "dist/db/models/*.js"
 	],
 	"migrations": [
-	   "src/server/db/migrations/**/*.ts"
-	]
+	   "src/server/db/migrations/*.ts"
+	],
+	"cli": {
+        "migrationsDir": "src/server/db/migrations/"
+    }
  }
