@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Question = void 0;
 const typeorm_1 = require("typeorm");
 const option_1 = __importDefault(require("./option"));
 const quiz_1 = __importDefault(require("./quiz"));
@@ -23,7 +22,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Question.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 15 }),
+    typeorm_1.Column({ length: 50 }),
     __metadata("design:type", String)
 ], Question.prototype, "text", void 0);
 __decorate([
@@ -37,5 +36,4 @@ __decorate([
 Question = __decorate([
     typeorm_1.Entity()
 ], Question);
-exports.Question = Question;
 exports.default = Question;

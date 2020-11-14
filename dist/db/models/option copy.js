@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Option = void 0;
 const typeorm_1 = require("typeorm");
 const question_1 = __importDefault(require("./question"));
 let Option = class Option {
@@ -38,4 +39,5 @@ __decorate([
 Option = __decorate([
     typeorm_1.Entity()
 ], Option);
+exports.Option = Option;
 exports.default = Option;

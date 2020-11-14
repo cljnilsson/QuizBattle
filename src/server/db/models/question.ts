@@ -3,12 +3,12 @@ import Option from "./option";
 import Quiz from "./quiz";
 
 @Entity()
-export class Question {
+class Question {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({length: 15})
+    @Column({length: 50})
     text: string;
 	
 	@OneToMany(() => Option, option => option.question, {eager: true})

@@ -10,7 +10,7 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "dist/public",
+      "dist/public/*",
       "src/**/*"
     ],
     "delay": "1000"
@@ -24,6 +24,8 @@
     "@types/react-query": "^1.1.2",
     "@types/webpack": "^4.41.24",
     "body-parser": "^1.19.0",
+    "chart.js": "^2.9.4",
+    "classnames": "^2.2.6",
     "compression": "^1.7.4",
     "concurrently": "^4.1.2",
     "dotenv": "^4.0.0",
@@ -34,6 +36,7 @@
     "ngrok": "^3.2.7",
     "nodemon": "^1.19.4",
     "react": "^17.0.1",
+    "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.1",
     "react-query": "^2.26.2",
     "reflect-metadata": "^0.1.13",

@@ -13,29 +13,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const question_1 = __importDefault(require("./question"));
-let Option = class Option {
-    constructor() {
-        this.correct = false;
-    }
+const quiz_1 = __importDefault(require("./quiz"));
+let Highscore = class Highscore {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Option.prototype, "id", void 0);
-__decorate([
-    typeorm_1.Column({ length: 15 }),
-    __metadata("design:type", String)
-], Option.prototype, "text", void 0);
+], Highscore.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", Boolean)
-], Option.prototype, "correct", void 0);
+    __metadata("design:type", Number)
+], Highscore.prototype, "score", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => question_1.default, question => question.options),
-    __metadata("design:type", question_1.default)
-], Option.prototype, "question", void 0);
-Option = __decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Highscore.prototype, "author", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], Highscore.prototype, "scoredetails", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => quiz_1.default),
+    __metadata("design:type", quiz_1.default)
+], Highscore.prototype, "quiz", void 0);
+Highscore = __decorate([
     typeorm_1.Entity()
-], Option);
-exports.default = Option;
+], Highscore);
+exports.default = Highscore;

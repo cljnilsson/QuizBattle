@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
 import Question from "./question";
 
 @Entity()
-export class Option {
+class Option {
 
     @PrimaryGeneratedColumn()
     id: number;
