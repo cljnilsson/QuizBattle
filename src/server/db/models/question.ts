@@ -1,9 +1,9 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, OneToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, OneToOne, BaseEntity } from 'typeorm';
 import Option from "./option";
 import Quiz from "./quiz";
 
 @Entity()
-class Question {
+class Question extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;

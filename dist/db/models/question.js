@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const option_1 = __importDefault(require("./option"));
 const quiz_1 = __importDefault(require("./quiz"));
-let Question = class Question {
+let Question = class Question extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),

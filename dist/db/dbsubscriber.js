@@ -8,8 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const admin_bro_1 = __importDefault(require("admin-bro"));
+const typeorm_2 = require("@admin-bro/typeorm");
+admin_bro_1.default.registerAdapter({ Database: typeorm_2.Database, Resource: typeorm_2.Resource });
 class DBSubscriber {
     static set connection(val) {
         this._connection = val;
@@ -27,6 +33,7 @@ class DBSubscriber {
         return __awaiter(this, void 0, void 0, function* () {
             this.connection = yield typeorm_1.createConnection();
             console.log("Connected to db!");
+            return this.connection;
         });
     }
 }

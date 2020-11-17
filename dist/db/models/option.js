@@ -14,8 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const question_1 = __importDefault(require("./question"));
-let Option = class Option {
+let Option = class Option extends typeorm_1.BaseEntity {
     constructor() {
+        super(...arguments);
         this.correct = false;
     }
 };

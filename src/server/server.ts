@@ -10,11 +10,11 @@ import helmet from "helmet";
 import compression from "compression";
 import bodyParser from "body-parser";
 
-import "./db/core";
-
 const app = express();
-const server = http.createServer(app);
 
+import {adminBro, router} from "./adminbro";
+
+app.use(adminBro.options.rootPath, router);
 
 require('dotenv').config({path:join('../.env')});
 
@@ -55,11 +55,11 @@ class Server {
         app.use(helmet());
         app.use(bodyParser.json());
         //app.use(compression());
-        app.use(express.static(__dirname + "/public"));
+		app.use(express.static(__dirname + "/public"));
     }
 
     async startup() {
-        server.listen(this.port);
+        app.listen(this.port);
         console.log(`started on port ${this.port}`);
         await this.setupPublicPreview();
         console.log("Public url: " + this.url);
@@ -73,8 +73,6 @@ class Server {
     }
 }
 
+new Server();
 
-let webServer = new Server();
-
-export default app;
-export {app};
+export = app;

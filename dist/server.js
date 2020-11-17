@@ -11,19 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.app = void 0;
 require("reflect-metadata");
 const path_1 = __importDefault(require("path"));
 const ngrok_1 = __importDefault(require("ngrok"));
 const express_1 = __importDefault(require("express"));
-const http_1 = __importDefault(require("http"));
 const helmet_1 = __importDefault(require("helmet"));
 const body_parser_1 = __importDefault(require("body-parser"));
-require("./db/core");
 const app = express_1.default();
-exports.app = app;
-const server = http_1.default.createServer(app);
+const adminbro_1 = require("./adminbro");
+app.use(adminbro_1.adminBro.options.rootPath, adminbro_1.router);
 require('dotenv').config({ path: join('../.env') });
 function join(dir) {
     return path_1.default.join(__dirname, dir);
@@ -58,7 +54,7 @@ class Server {
     }
     startup() {
         return __awaiter(this, void 0, void 0, function* () {
-            server.listen(this.port);
+            app.listen(this.port);
             console.log(`started on port ${this.port}`);
             yield this.setupPublicPreview();
             console.log("Public url: " + this.url);
@@ -73,5 +69,5 @@ class Server {
         });
     }
 }
-let webServer = new Server();
-exports.default = app;
+new Server();
+module.exports = app;

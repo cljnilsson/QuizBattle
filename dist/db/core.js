@@ -52,5 +52,4 @@ class DB extends dbsubscriber_1.default {
         });
     }
 }
-DB.init();
 exports.default = DB;

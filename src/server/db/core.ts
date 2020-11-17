@@ -38,6 +38,4 @@ class DB extends DBSubscriber{
 	}
 }
 
-DB.init();
-
 export default DB;

@@ -1,7 +1,7 @@
 import { useQuery} from 'react-query';
 
 function Get(key : string, url : string) {
-	return useQuery(key, () => {
+	return useQuery<any, Error>(key, () => {
 		return fetch(url).then(res => res.json());
 	});
 }

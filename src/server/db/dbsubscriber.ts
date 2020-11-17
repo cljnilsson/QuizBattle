@@ -1,5 +1,14 @@
 import {createConnection} from "typeorm";
 
+import AdminBro from 'admin-bro';
+import { Database, Resource } from '@admin-bro/typeorm';
+import Quiz from "./models/quiz";
+
+AdminBro.registerAdapter({ Database, Resource });
+
+/*import { validate } from 'class-validator'
+Resource.validate = validate;*/
+
 class DBSubscriber {
 	private static _connection
 
@@ -23,7 +32,8 @@ class DBSubscriber {
 	static async init() {
 		this.connection = await createConnection();
 		// here you can start to work with your entities
-		console.log("Connected to db!")
+		console.log("Connected to db!");
+		return this.connection;
 	}
 }
 

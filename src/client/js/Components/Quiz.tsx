@@ -6,24 +6,24 @@ import QuizBody from './QuizBody';
 
 
 function Quiz() {
+	let highscores;
 	let {quiz, id} = useContext(Data);
 	const [started, setStarted] = useState(false);
 	const [finished, setFinished] = useState(false);
 	const [question, setQuestion] = useState(0);
-	let highscores;
 	
 	if(!quiz) {
 		const queries = () => {
-			const res1 =  Get("gethighscores", "/gethighscores/" + id);
+			const res1 = Get("gethighscores", "/gethighscores/" + id);
 			const res2 = Get("specificquiz", "/specificquiz/" + id);
 			return [res1, res2];
 		}
 		let qs = queries();
 
 		for(let d of qs) {
-			if (d.status === "loading") return <span>'Loading...'</span>
+			if (d.status === "loading") return <span>Loading...</span>
 
-			if (d.error) return <span>'An error has occurred: ' + error.message</span>
+			if (d.error) return <span>An error has occurred: {d.error.message}</span>
 		}
 
 		let q = qs[1].data;
@@ -33,9 +33,9 @@ function Quiz() {
 
 	} else if(!highscores) {
 		let { status, error, data } = Get("gethighscores", "/gethighscores/" + id);
-		if (status === "loading") return <span>'Loading...'</span>
+		if (status === "loading") return <span>Loading...</span>
 
-		if (error) return <span>'An error has occurred: ' + error.message</span>
+		if (error) return <span>An error has occurred: {error.message}</span>
 
 		highscores = data;
 	}

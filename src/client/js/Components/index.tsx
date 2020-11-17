@@ -26,9 +26,12 @@ function Index() {
 
 	if (status === "loading") return <span>'Loading...'</span>
 
-	if (error) return <span>'An error has occurred: ' + error.message</span>
+	if (error) return <span>An error has occurred: {error.message}</span>
 
-	return <>{QuizList()}</>;
+	return <>
+	{QuizList()}
+	<Link to="/newquiz" className="btn btn-outline-light mt-3">Create Quiz</Link>
+	</>;
 }
    
 
