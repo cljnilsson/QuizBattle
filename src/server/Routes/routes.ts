@@ -3,6 +3,7 @@ import "../db/generate";
 
 import Highscore from "../db/models/highscore";
 import Question from "../db/models/question";
+import Option from "../db/models/option";
 import Quiz from "../db/models/quiz";
 
 import QuizGrader from "../libs/QuizGrader";
@@ -42,4 +43,22 @@ app.post("/submithighscore", async (req, res) => {
 
 	await DB.create(Highscore, obj);
 	res.json({...obj});
+});
+
+app.post("/createquiz", async (req, res) => {
+	let {questions, ...quiz} = req.body;
+	//console.log(questions)
+	// Look into combining into fewer queries
+	let parent = await DB.create(Quiz, quiz);
+	for(let q of questions) {
+		console.log(q)
+		q.quiz = parent;
+		let question = await DB.create(Question, q);
+		for(let o of q.options) {
+			o.question = question;
+			DB.create(Option, o);
+		}
+	}
+
+	res.json({message: "success"});
 });

@@ -5,17 +5,18 @@ import QuizContext from "../QuizContext";
 
 function QuizMaker(props) {
 	let context = useContext(QuizContext);
+	let [text, setText] = useState("");
 	
 	function onConfirm() {
 		let current = [...context.questions];
-		current.push({text: "Baba", options: []});
+		current.push({text: text, options: []});
 		context.setQuestions(current);
 	}
 
 	// Update confirm link to take to the created question later
 	return <>
 		<Link to={"/newquiz"}>Back</Link>
-		<input type="text" className="form-control" placeholder="Question"/>
+		<input type="text" className="form-control" placeholder="Question" onChange={(event) => setText(event.target.value)} defaultValue={text}/>
 		<Link to="/newquiz" className="btn btn-outline-light mt-3" onClick={onConfirm}>Confirm</Link>
 		</>;
 }

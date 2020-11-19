@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import QuizContext from "../QuizContext";
-import Get from "../../Libs/Request";
+import Get, { Post } from "../../Libs/Request";
 
 function QuizMaker(props) {
 	let context = useContext(QuizContext);
@@ -41,6 +41,7 @@ function QuizMaker(props) {
 					<Link to={"/newquiz/newquestion"} className="btn btn-outline-light">+</Link>
 				</div>
 			</div>
+			<button className="btn btn-outline-light" onClick={() => Post("quizpost", "/createquiz", context)}>Create Quiz</button>
 		</div>
 	</>;
 }
