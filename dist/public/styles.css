@@ -2,6 +2,10 @@
     user-select: none;
 }
 
+body {
+	font-family: 'Oswald', sans-serif !important;
+}
+
 ul {
     list-style: none;
 }

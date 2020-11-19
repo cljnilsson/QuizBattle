@@ -5,6 +5,7 @@ import Get from "../Libs/Request";
 
 import Data 				from "./test";
 import Index 				from "./index";
+
 import Quiz 				from "./Quiz/Quiz";
 import QuizCreator 			from "./Quiz/QuizMaker";
 import QuizQuestionEdit 	from "./Quiz/QuizQuestionEdit";
@@ -14,30 +15,28 @@ import QuizOptionMaker 		from "./Quiz/QuizOptionMaker";
 import QuizContext			from "./QuizContext";
 
 function App() {
-	
-
-	let [questions, setQuestions] = useState([]);
-	let [name, setName] = useState("");
-	let [author, setAuthor] = useState("");
-	let [description, setDescription] = useState("");
+	let [questions, setQuestions] 		= useState([]);
+	let [name, setName] 				= useState("");
+	let [author, setAuthor] 			= useState("");
+	let [description, setDescription] 	= useState("");
 
 	let val = {
 		name: name,
-		setName: (n) => setName(n),
-		description: description,
+		setName: 		(n) => setName(n),
+		description: 	description,
 		setDescription: (d) => setDescription(d),
-		author: author,
-		setAuthor: (a) => setAuthor(a),
-		created: new Date(),
-		questions: questions,
-		setQuestions: (q) => setQuestions(q)
+		author: 		author,
+		setAuthor: 		(a) => setAuthor(a),
+		created: 		new Date(),
+		questions: 		questions,
+		setQuestions: 	(q) => setQuestions(q)
 	};
 
-	const AllQuiz 			= () => <Index />
-	const CreateQuiz 		= ({match}) => <QuizContext.Provider value={val}><QuizCreator id={match.params.id}/></QuizContext.Provider>
+	const AllQuiz 			= () 		=> <Index />
+	const CreateQuiz 		= ({match}) => <QuizContext.Provider value={val}><QuizCreator 		id={match.params.id} /></QuizContext.Provider>
 	const CreateQuestion 	= ({match}) => <QuizContext.Provider value={val}><QuizQuestionMaker id={match.params.id} /></QuizContext.Provider>
-	const EditQuestion 		= ({match}) => <QuizContext.Provider value={val}><QuizQuestionEdit id={match.params.id} /></QuizContext.Provider>
-	const CreateOption		= ({match}) => <QuizContext.Provider value={val}><QuizOptionMaker id={match.params.id} /></QuizContext.Provider>
+	const EditQuestion 		= ({match}) => <QuizContext.Provider value={val}><QuizQuestionEdit  id={match.params.id} /></QuizContext.Provider>
+	const CreateOption		= ({match}) => <QuizContext.Provider value={val}><QuizOptionMaker 	id={match.params.id} /></QuizContext.Provider>
 
 	function TakeQuiz({match}) {
 		let selected;
@@ -54,7 +53,10 @@ function App() {
 	const [data, setData] = useState([]);
 
 	return (
-		<div className="container mt-5">
+		<div className="container">
+			<div className="text-center">
+				<img src="/logo.png"></img>
+			</div>
 			<Router>
 				<Route exact path="/" 							render={AllQuiz} />
         		<Route exact path="/quiz/:id" 					render={TakeQuiz} />

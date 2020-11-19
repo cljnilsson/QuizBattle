@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Data from "../test";
 import {Get, Post} from "../../Libs/Request";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import QuizBody from './QuizBody';
 
@@ -46,6 +47,7 @@ function Quiz() {
 	let count = started ? (question + 1) +"/" + qCount : "";
 	return (
 		<>
+			<Link to="/">Back</Link>
 			<div className="row">
 				<div className="col">
 					<h1>{quiz.name}</h1>

@@ -15,7 +15,8 @@ const plugins = [
 const config: webpack.Configuration = {
     entry: "./src/client/index.tsx",
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(tsx)x?$/,
                 exclude: /node_modules|public/,
                 use: {
@@ -38,7 +39,7 @@ const config: webpack.Configuration = {
 				})
             },
             {
-                test: /\.(png|jpg|gif|webm)$/,
+                test: /\.(png|jpg|gif|webm|svg)$/,
                 use: [{
                     loader: "file-loader",
                     options: {

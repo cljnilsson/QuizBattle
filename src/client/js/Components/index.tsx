@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import Loading from "./Loading";
 import Get from "../Libs/Request";
 
 function Index() {
@@ -24,13 +24,17 @@ function Index() {
 
 	const { status, error, data } = Get("allquiz", "/allquiz");
 
-	if (status === "loading") return <span>'Loading...'</span>
+	if (status === "loading") return <Loading />
 
 	if (error) return <span>An error has occurred: {error.message}</span>
 
 	return <>
-	{QuizList()}
-	<Link to="/newquiz" className="btn btn-outline-light mt-3">Create Quiz</Link>
+		<div className="row">
+			<div className="col card-columns">
+				{QuizList()}
+			</div>
+		</div>
+		<Link to="/newquiz" className="btn btn-outline-light mt-3">Create Quiz</Link>
 	</>;
 }
    
