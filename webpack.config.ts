@@ -58,6 +58,9 @@ const config: webpack.Configuration = {
 	},
 	watch: true,
 	stats: "minimal",
+	performance: {
+		hints: false
+	},
     plugins
 };
 

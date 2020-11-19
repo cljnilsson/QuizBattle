@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Data from "./test";
-import {Get, Post} from "../Libs/Request";
+import Data from "../test";
+import {Get, Post} from "../../Libs/Request";
 
 import QuizBody from './QuizBody';
 

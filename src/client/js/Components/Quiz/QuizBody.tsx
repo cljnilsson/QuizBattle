@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import classNames from "classnames";
 
-import {Get, Post} from "../Libs/Request";
+import {Get, Post} from "../../Libs/Request";
 
-import Breakdown from "./Breakdown";
+import Breakdown from "../Breakdown";
 
-import Doughnut from "./Charts/doughnut";
-import Line from "./Charts/line";
+import Doughnut from "../Charts/doughnut";
+import Line from "../Charts/line";
 
 function split(arr, chunk) {
 	let toChunk = arr.length / chunk;
@@ -74,8 +74,10 @@ function QuizBody(props) {
 		return <Breakdown qCount={props.qCount} id={props.id} answers={answers}/>
 	} else if(props.started) {
 		if(props.question >= props.qCount) {
+			/* Will display breakdown next render, this wont be visible.
+			This is questionable rather than just putting <Breadown></Breadown> here but I think it is easier to understand if it is put in a if block with .isFinished */
 			props.setFinished(true)
-			return <span></span>; //Will display breakdown next render, this wont be visible
+			return <span></span>; 
 		}
 		return (
 			<>
@@ -101,6 +103,7 @@ function QuizBody(props) {
 		for(let h of props.highscores) {
 			let percent = h.score / props.qCount * 100;
 
+			// Make a loop for this in the future?
 			if(percent < 25) {
 				doughnutData[0] += 1;
 			} else if(percent < 50) {
