@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import QuizContext from "../QuizContext";
+import QuizContext from "../Contexts/QuizContext";
 
 function QuizMaker(props) {
 	let context = useContext(QuizContext);

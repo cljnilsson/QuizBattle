@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {Post} from "../Libs/Request";
+import {Post} from "../../Libs/Request";
 
 function Breakdown(props) {
 	let [score, setScore] = useState(-1);

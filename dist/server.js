@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 require("reflect-metadata");
 const path_1 = __importDefault(require("path"));
-const ngrok_1 = __importDefault(require("ngrok"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const body_parser_1 = __importDefault(require("body-parser"));
@@ -46,14 +45,6 @@ class Server {
     async startup() {
         app.listen(this.port);
         console.log(`started on port ${this.port}`);
-        await this.setupPublicPreview();
-        console.log("Public url: " + this.url);
-    }
-    async setupPublicPreview() {
-        this._url = await ngrok_1.default.connect({
-            addr: process.env.PORT,
-            region: "eu"
-        });
     }
 }
 new Server();

@@ -109,8 +109,7 @@ button {
 
 .container {
 	background-color: rgba(0, 0, 0, 0.9);
-	min-height: 900px;
-	max-height: 90%;
+	min-height: 935px;
 	padding-top: 15px;
 	box-shadow: 5px 5px 5px black;
 }

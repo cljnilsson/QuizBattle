@@ -1,13 +1,8 @@
 import "reflect-metadata";
 
 import path from "path";
-import ngrok from "ngrok";
-
 import express from "express";
-import http from "http";
-
 import helmet from "helmet";
-import compression from "compression";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -61,15 +56,6 @@ class Server {
     async startup() {
         app.listen(this.port);
         console.log(`started on port ${this.port}`);
-        await this.setupPublicPreview();
-        console.log("Public url: " + this.url);
-    }
-
-    async setupPublicPreview() {
-        this._url = await ngrok.connect({
-            addr: process.env.PORT,
-            region: "eu"
-        });
     }
 }
 

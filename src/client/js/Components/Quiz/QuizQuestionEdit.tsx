@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import classnames from "classnames";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import QuizContext from "../QuizContext";
+import QuizContext from "../Contexts/QuizContext";
 
 function QuizQuestionEdit(props) {
 	let context = useContext(QuizContext);

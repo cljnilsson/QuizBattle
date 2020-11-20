@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 import {Get, Post} from "../../Libs/Request";
 
-import Breakdown from "../Breakdown";
+import Breakdown from "./Breakdown";
 
 import Doughnut from "../Charts/doughnut";
 import Line from "../Charts/line";

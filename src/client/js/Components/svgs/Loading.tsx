@@ -2,7 +2,7 @@ import React from 'react';
 
 // For react syntax
 function Loading() {
-    return <img src="/loading.svg" />;
+    return <div className="text-center"><img src="/loading.svg" /></div>;
 }
 
 export default Loading;

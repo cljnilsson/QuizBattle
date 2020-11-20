@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Data from "../test";
-import {Get, Post} from "../../Libs/Request";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import Data from "../Contexts/IndexContext";
+import {Get} from "../../Libs/Request";
+import { BrowserRouter as Link } from "react-router-dom";
 
-import QuizBody from './QuizBody';
+import QuizBody from "./QuizBody";
 
 
 function Quiz() {
@@ -14,6 +14,7 @@ function Quiz() {
 	const [question, setQuestion] = useState(0);
 	
 	if(!quiz) {
+		console.log("Quiz data does not exist!");
 		const queries = () => {
 			const res1 = Get("gethighscores", "/gethighscores/" + id);
 			const res2 = Get("specificquiz", "/specificquiz/" + id);
@@ -33,6 +34,7 @@ function Quiz() {
 		highscores = h;
 
 	} else if(!highscores) {
+		console.log("Quiz data is already loaded!");
 		let { status, error, data } = Get("gethighscores", "/gethighscores/" + id);
 		if (status === "loading") return <span>Loading...</span>
 
