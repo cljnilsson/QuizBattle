@@ -1,17 +1,26 @@
-import React from "react"
+import React, { useContext } from "react"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import {Post} from "../Libs/Request";
+import UserContext from "./Contexts/UserStateContext";
 
 export default function Register() {
+    let context = useContext(UserContext);
+    let history = useHistory();
 
     function onSubmit(e) {
+        Post("makeacc", "/register", {});
         // Todo
+        context.setOnline(true);
+        context.setName("Demo user");
         e.preventDefault();
+        history.push("/");
     }
 
     return (<>
         <Link to="/">Back</Link>
         <div className="row justify-content-center align-items-center">
-            <form className="col col-sm-6">
+            <form className="col col-sm-6" onSubmit={onSubmit}>
                 <div className="form-group">
                     <label>Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>

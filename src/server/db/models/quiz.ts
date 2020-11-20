@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity, CreateDateColumn } from "typeorm";
 import Question from "./question";
 
 @Entity()
@@ -16,7 +16,7 @@ class Quiz extends BaseEntity {
     @Column()
     author: string;
 
-    @Column()
+    @CreateDateColumn()
 	created: Date;
 	
 	@OneToMany(() => Question, question => question.quiz, {eager: true})

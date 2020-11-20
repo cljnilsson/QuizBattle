@@ -8,39 +8,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const question_1 = __importDefault(require("./question"));
-let Quiz = class Quiz extends typeorm_1.BaseEntity {
+let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Quiz.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column({ length: 15 }),
     __metadata("design:type", String)
-], Quiz.prototype, "name", void 0);
-__decorate([
-    typeorm_1.Column({ length: 100 }),
-    __metadata("design:type", String)
-], Quiz.prototype, "description", void 0);
+], User.prototype, "name", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Quiz.prototype, "author", void 0);
+], User.prototype, "pass", void 0);
+__decorate([
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", Date)
+], User.prototype, "lastUpdate", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
-], Quiz.prototype, "created", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => question_1.default, question => question.quiz, { eager: true }),
-    __metadata("design:type", Array)
-], Quiz.prototype, "questions", void 0);
-Quiz = __decorate([
+], User.prototype, "created", void 0);
+User = __decorate([
     typeorm_1.Entity()
-], Quiz);
-exports.default = Quiz;
+], User);
+exports.default = User;

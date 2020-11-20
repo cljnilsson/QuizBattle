@@ -1,6 +1,5 @@
 import "reflect-metadata";
 
-import path from "path";
 import express from "express";
 import helmet from "helmet";
 import bodyParser from "body-parser";
@@ -10,12 +9,6 @@ const app = express();
 import {adminBro, router} from "./adminbro";
 
 app.use(adminBro.options.rootPath, router);
-
-require('dotenv').config({path:join('../.env')});
-
-function join(dir) {
-    return path.join(__dirname, dir);
-}
 
 function header(req, res, next) {
     res.setHeader("Content-Security-Policy", "connect-src 'self' ws:");

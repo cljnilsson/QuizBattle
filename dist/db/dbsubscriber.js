@@ -10,6 +10,7 @@ admin_bro_1.default.registerAdapter({ Database: typeorm_2.Database, Resource: ty
 class DBSubscriber {
     static set connection(val) {
         this._connection = val;
+        this.initialized = true;
         for (let s of this.subscribers) {
             s();
         }
@@ -19,6 +20,9 @@ class DBSubscriber {
     }
     static addSubscriber(callback) {
         this.subscribers.push(callback);
+        if (this.initialized) {
+            callback();
+        }
     }
     static async init() {
         this.connection = await typeorm_1.createConnection();
@@ -26,5 +30,6 @@ class DBSubscriber {
         return this.connection;
     }
 }
+DBSubscriber.initialized = false;
 DBSubscriber.subscribers = [];
 exports.default = DBSubscriber;

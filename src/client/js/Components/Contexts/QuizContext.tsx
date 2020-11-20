@@ -1,7 +1,5 @@
 import React, {createContext, Dispatch, useReducer} from "react";
 
-let defaultFunction = () => {};
-
 interface AppContextInterface {
 	name,
 	setName,

@@ -1,14 +1,26 @@
 import DB from "./core";
 import Quiz from "./models/quiz";
 import Question from "./models/question";
-import Option from "./models/option"
+import Option from "./models/option";
+import User from "./models/User";
+import bcrypt from "bcrypt";
 
 DB.addSubscriber(test);
 
 async function test () {
+	let users = await DB.get(User);
+
+	if(users.length === 0) {
+		bcrypt.genSalt(10, function(err, salt) {
+			bcrypt.hash("admin", salt, function(err, hash) {
+				DB.create(User, {name: "admin", pass: hash});
+			});
+		});
+	}
+	
 	let all = await DB.get(Quiz);
 	if(all.length === 0) {
-		let quiz = await DB.create(Quiz, {author: "demoAdmin", created: new Date(), name: "Demo", description: "This is a demo quiz about random stuff. Very serious."});
+		let quiz = await DB.create(Quiz, {author: "demoAdmin", name: "Demo", description: "This is a demo quiz about random stuff. Very serious."});
 		let question = await DB.create(Question, {text: "What is 1 + 1", quiz: quiz});
 		DB.create(Option, {text: "4", question: question});
 		DB.create(Option, {text: "3", question: question});

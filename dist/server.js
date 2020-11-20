@@ -3,17 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 require("reflect-metadata");
-const path_1 = __importDefault(require("path"));
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const app = express_1.default();
 const adminbro_1 = require("./adminbro");
 app.use(adminbro_1.adminBro.options.rootPath, adminbro_1.router);
-require('dotenv').config({ path: join('../.env') });
-function join(dir) {
-    return path_1.default.join(__dirname, dir);
-}
 function header(req, res, next) {
     res.setHeader("Content-Security-Policy", "connect-src 'self' ws:");
     res.header("Access-Control-Allow-Origin", "*");

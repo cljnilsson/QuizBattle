@@ -1,8 +1,7 @@
 import {createConnection} from "typeorm";
 
-import AdminBro from 'admin-bro';
-import { Database, Resource } from '@admin-bro/typeorm';
-import Quiz from "./models/quiz";
+import AdminBro from "admin-bro";
+import { Database, Resource } from "@admin-bro/typeorm";
 
 AdminBro.registerAdapter({ Database, Resource });
 
@@ -10,12 +9,15 @@ AdminBro.registerAdapter({ Database, Resource });
 Resource.validate = validate;*/
 
 class DBSubscriber {
-	private static _connection
+	private static _connection;
+	private static initialized = false;
 
 	private static subscribers : { (): void; } [] = []
 
 	static set connection(val) {
 		this._connection = val;
+		this.initialized = true;
+
 		for(let s of this.subscribers) {
 			s();
 		}
@@ -27,7 +29,10 @@ class DBSubscriber {
 
 	static addSubscriber(callback : () => void) {
 		this.subscribers.push(callback)
-	}
+		if(this.initialized) {
+			callback();
+		}
+ 	}
 
 	static async init() {
 		this.connection = await createConnection();
