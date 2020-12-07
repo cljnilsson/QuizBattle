@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import Data from "../Contexts/IndexContext";
 import {Get} from "../../Libs/Request";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import QuizBody from "./QuizBody";
 

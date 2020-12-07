@@ -6,6 +6,8 @@ import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
 import Data from "./Contexts/IndexContext";
 
+import Timer from "./Timer";
+
 function Index() {
 	let {allQuiz, setAllQuiz} = useContext(Data);
 	function QuizList() {

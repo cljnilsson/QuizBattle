@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
 
 import classNames from "classnames";
 
@@ -9,6 +8,7 @@ import Breakdown from "./Breakdown";
 
 import Doughnut from "../Charts/doughnut";
 import Line from "../Charts/line";
+import Timer from "../Timer";
 
 function split(arr, chunk) {
 	let toChunk = arr.length / chunk;
@@ -63,12 +63,12 @@ function QuizBody(props) {
 		props.setQuestion(props.question + 1);
 		setAnswers(a => [...a, active]);
 		setActive([]);
+		setSec(30);
 	}
 
-	let [active, setActive] = useState({});
-	let [answers, setAnswers] = useState([]);
-
-	console.log(answers);
+	let [active, setActive] 	= useState({});
+	let [answers, setAnswers] 	= useState([]);
+	let [sec, setSec] 			= useState(30);
 
 	if(props.finished) {
 		return <Breakdown qCount={props.qCount} id={props.id} answers={answers}/>
@@ -77,11 +77,13 @@ function QuizBody(props) {
 			/* Will display breakdown next render, this wont be visible.
 			This is questionable rather than just putting <Breadown></Breadown> here but I think it is easier to understand if it is put in a if block with .isFinished */
 			props.setFinished(true)
-			return <span></span>; 
+			return <span></span>;
 		}
+
 		return (
 			<>
 				<h3>{props.quiz.questions[props.question].text}</h3>
+				<Timer val={sec} setVal={setSec} onFinish={onConfirmAnswer}/>
 				{getOptions()}
 				<div className="row">
 					<div className="col text-center">
@@ -122,18 +124,19 @@ function QuizBody(props) {
 		}
 
 		return(
-		<>
-			<div className="row">
-				<div className="col">
-					<Line labels={l}  data={d} />
+			<>
+				<div className="row">
+					<div className="col">
+						<Line labels={l}  data={d} />
+					</div>
+					<div className="col">
+						<Doughnut data={doughnutData} />
+					</div>
 				</div>
-				<div className="col">
-					<Doughnut data={doughnutData} />
-				</div>
-			</div>
-			<hr/>
-			<button data-toggle="button" className="btn btn-lg btn-outline-light centerV" onClick={() => props.setStarted(true)}>Start Quiz</button>
-		</>)
+				<hr/>
+				<button data-toggle="button" className="btn btn-lg btn-outline-light centerV" onClick={() => props.setStarted(true)}>Start Quiz</button>
+			</>
+		);
 	}
 }
    
