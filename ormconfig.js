@@ -9,7 +9,7 @@ module.exports =  {
 	"cache": true,
 	"logging": false,
 	"entities": [
-	   "dist/db/models/*.js"
+		__dirname + "/dist/db/models/*.js"
 	],
 	"migrations": [
 	   "src/server/db/migrations/*.ts"

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Data 				from "./Contexts/IndexContext";
 import Index 				from "./index";
 import Register 			from "./Register";
+import Login 				from "./Login";
 
 import Quiz 				from "./Quiz/Quiz";
 import QuizCreator 			from "./Quiz/QuizMaker";
@@ -41,8 +42,9 @@ function App() {
 		setOnline: (b : boolean) => setOnline(b)
 	};
 
+	const LoginUser			= () 		=> <UserStateContext.Provider 	value={userState}><Login/></UserStateContext.Provider>
 	const RegisterUser		= ()		=> <UserStateContext.Provider 	value={userState}><Register/></UserStateContext.Provider>
-	const AllQuiz 			= () 		=> <Data.Provider 		 		value={{allQuiz, setAllQuiz}}><Index/></Data.Provider>
+	const AllQuiz 			= () 		=> <UserStateContext.Provider 	value={userState}><Data.Provider value={{allQuiz, setAllQuiz}}><Index/></Data.Provider></UserStateContext.Provider>
 	const CreateQuiz 		= ({match}) => <QuizContext.Provider 		value={val}><QuizCreator 		id={match.params.id} /></QuizContext.Provider>
 	const CreateQuestion 	= ({match}) => <QuizContext.Provider 		value={val}><QuizQuestionMaker  id={match.params.id} /></QuizContext.Provider>
 	const EditQuestion 		= ({match}) => <QuizContext.Provider 		value={val}><QuizQuestionEdit   id={match.params.id} /></QuizContext.Provider>
@@ -70,6 +72,7 @@ function App() {
 				</div>
 				<Route exact path="/" 							render={AllQuiz} />
 				<Route exact path="/register"					render={RegisterUser} />
+				<Route exact path="/login"						render={LoginUser} />
 				<Route exact path="/quiz/:id" 					render={TakeQuiz} />
 				<Route exact path="/newquiz" 					render={CreateQuiz} />
 				<Route exact path="/newquiz/newquestion" 		render={CreateQuestion} />

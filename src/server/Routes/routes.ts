@@ -1,14 +1,15 @@
 import DB from "../db/core";
 import "../db/generate";
 
-import Highscore from "../db/models/highscore";
-import Question from "../db/models/question";
-import Option from "../db/models/option";
-import Quiz from "../db/models/quiz";
+import Highscore 	from "../db/models/highscore";
+import Question 	from "../db/models/question";
+import Option 		from "../db/models/option";
+import Quiz 		from "../db/models/quiz";
+import User 		from "../db/models/account";
 
-import QuizGrader from "../libs/QuizGrader";
-
-import app from "../server";
+import QuizGrader 	from "../libs/QuizGrader";
+import app 			from "../server";
+import bcrypt 		from "bcrypt";
 
 app.get("/", (req, res) => {
 	res.sendfile("./dist/public/index.html");
@@ -32,9 +33,39 @@ app.get("*", (req, res) => {
 	res.sendfile("./dist/public/index.html");
 });
 
+app.post("/register", async (req, res) => {
+	let r = await DB.createUser({name: req.body.username, pass: req.body.password}); // Not sure if a variable is required for await to take effect, confirm at a later date
+	res.json({message: "Account created"});
+});
+
+app.post("/login", async (req, res) => {
+	let correct : boolean;
+	let err		: string;
+
+	if(req.body.username && req.body.password) {
+		let acc = await DB.getWhere(User, {name: req.body.username});
+		if(acc.length > 0) {
+			acc = acc[0]; 
+			correct = await bcrypt.compare(req.body.password, acc.pass);
+			err = "";
+			if(!correct) {
+				err = "Invalid Password";
+			}
+		} else {
+			correct = false;
+			err = "User does not exist";
+		}
+	} else {
+		correct = false;
+		err = "Missing required data in body";
+	}
+
+	res.json({valid: correct, err: err});
+});
+
 app.post("/submithighscore", async (req, res) => {
 	let obj  = {author: req.body.author, quiz: req.body.quiz, score: 0, scoredetails: ""};
-	let size = Object.keys(req.body.answers).length
+	//let size = Object.keys(req.body.answers).length
 	let quiz = await DB.getFirstWhere(Quiz, {id: req.body.quiz});
 
 	let grade = new QuizGrader(quiz, req.body.answers);

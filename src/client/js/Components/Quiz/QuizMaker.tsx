@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import QuizContext from "../Contexts/QuizContext";
 import Get, { Post } from "../../Libs/Request";

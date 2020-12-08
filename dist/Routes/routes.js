@@ -20,8 +20,10 @@ const highscore_1 = __importDefault(require("../db/models/highscore"));
 const question_1 = __importDefault(require("../db/models/question"));
 const option_1 = __importDefault(require("../db/models/option"));
 const quiz_1 = __importDefault(require("../db/models/quiz"));
+const account_1 = __importDefault(require("../db/models/account"));
 const QuizGrader_1 = __importDefault(require("../libs/QuizGrader"));
 const server_1 = __importDefault(require("../server"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 server_1.default.get("/", (req, res) => {
     res.sendfile("./dist/public/index.html");
 });
@@ -39,9 +41,36 @@ server_1.default.get("/gethighscores/:quizid", async (req, res) => {
 server_1.default.get("*", (req, res) => {
     res.sendfile("./dist/public/index.html");
 });
+server_1.default.post("/register", async (req, res) => {
+    let r = await core_1.default.createUser({ name: req.body.username, pass: req.body.password });
+    res.json({ message: "Account created" });
+});
+server_1.default.post("/login", async (req, res) => {
+    let correct;
+    let err;
+    if (req.body.username && req.body.password) {
+        let acc = await core_1.default.getWhere(account_1.default, { name: req.body.username });
+        if (acc.length > 0) {
+            acc = acc[0];
+            correct = await bcrypt_1.default.compare(req.body.password, acc.pass);
+            err = "";
+            if (!correct) {
+                err = "Invalid Password";
+            }
+        }
+        else {
+            correct = false;
+            err = "User does not exist";
+        }
+    }
+    else {
+        correct = false;
+        err = "Missing required data in body";
+    }
+    res.json({ valid: correct, err: err });
+});
 server_1.default.post("/submithighscore", async (req, res) => {
     let obj = { author: req.body.author, quiz: req.body.quiz, score: 0, scoredetails: "" };
-    let size = Object.keys(req.body.answers).length;
     let quiz = await core_1.default.getFirstWhere(quiz_1.default, { id: req.body.quiz });
     let grade = new QuizGrader_1.default(quiz, req.body.answers);
     obj.score = grade.score;

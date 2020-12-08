@@ -2,7 +2,7 @@ import DB from "./core";
 import Quiz from "./models/quiz";
 import Question from "./models/question";
 import Option from "./models/option";
-import User from "./models/User";
+import User from "./models/account";
 
 DB.addSubscriber(test);
 

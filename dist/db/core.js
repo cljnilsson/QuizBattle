@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const dbsubscriber_1 = __importDefault(require("./dbsubscriber"));
-const User_1 = __importDefault(require("./models/User"));
+const account_1 = __importDefault(require("./models/account"));
 class DB extends dbsubscriber_1.default {
     static async createUser(o) {
-        let q = new User_1.default();
+        let q = new account_1.default();
         let salt = await bcrypt_1.default.genSalt(10);
         let pass = await bcrypt_1.default.hash("admin", salt);
         o.pass = pass;

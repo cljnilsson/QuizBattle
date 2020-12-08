@@ -5,11 +5,14 @@ import Get from "../Libs/Request";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
 import Data from "./Contexts/IndexContext";
+import UserContext from "./Contexts/UserStateContext";
 
 import Timer from "./Timer";
 
 function Index() {
 	let {allQuiz, setAllQuiz} = useContext(Data);
+	let {online, name} = useContext(UserContext);
+
 	function QuizList() {
 		const list = [];
 
@@ -28,6 +31,19 @@ function Index() {
 		return list;
 	}
 
+	function loginView() {
+		if(!online) {
+			return <div className="col text-right">
+				<Link to="/register" className="btn btn-outline-light">Register</Link>
+				<Link to="/login" className="btn btn-outline-light">Login</Link>
+			</div>
+		} else {
+			return <div className="col text-right">
+				<small>You are logged in as {name}</small>
+			</div>
+		}
+	}
+
 	const { status, error, data } = Get("allquiz", "/allquiz");
 
 	if (status === "loading") return <Loading />
@@ -41,9 +57,7 @@ function Index() {
 			<div className="col">
 				<Link to="/newquiz" className="btn btn-outline-light">Create Quiz</Link>
 			</div>
-			<div className="col text-right">
-				<Link to="/register" className="btn btn-outline-light">Register</Link>
-			</div>
+			{loginView()}
 		</div>
 		<Zoom duration={250}>
 			<Fade duration={2000}>

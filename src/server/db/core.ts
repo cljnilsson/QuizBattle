@@ -1,12 +1,11 @@
 import "reflect-metadata";
-import {createConnection, Db, QueryRunner} from "typeorm";
 import bcrypt from "bcrypt";
 import DBSubscriber from "./dbsubscriber";
-import User from "./models/User";
+import User from "./models/account";
 
 type Class = { new(...args: any[]): any; };
 
-class DB extends DBSubscriber{
+class DB extends DBSubscriber {
 	// Dedicated function since encryption is needed unlike all other creates.
 	static async createUser(o) {
 		let q = new User();
