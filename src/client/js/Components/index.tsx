@@ -1,74 +1,109 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Loading from "./svgs/Loading";
 import Get from "../Libs/Request";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
-import Data from "./Contexts/IndexContext";
 import UserContext from "./Contexts/UserStateContext";
 
-import Timer from "./Timer";
-
 function Index() {
-	let {allQuiz, setAllQuiz} = useContext(Data);
 	let {online, name} = useContext(UserContext);
+	let [selected, setSelected] = useState(-1);
 
-	function QuizList() {
-		const list = [];
+	let classes = ["dh", "dk", "druid", "hunter", "mage", "monk", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"];
 
-		for(let q of data) {
-			list.push(
-				<div className="card">
-					<div className="card-body">
-						<h5 className="card-title">{q.name}</h5>
-						<p className="card-text">{q.description}</p>
-						<Link to={"/quiz/" + q.id} className="btn btn-primary">Take Quiz</Link>
+	function select(e) {
+		console.log(e.target.dataset.id);
+		setSelected(e.target.dataset.id);
+	}
+
+	function images() {
+		let addType = ".png";
+		let all = [...classes];
+
+		return all.map((v, i) => <img className={selected == i ? "class classSelected" : "class"} data-id={i} src={v + addType} onClick={select}></img>)
+	}
+
+	function form() {
+		return 	(
+		<div className="row mt-1 justify-content-center">
+			<div className="col-8">
+				<form>
+					<div className="form-row">
+						<div className="col">
+							<input type="text" className="form-control" placeholder="First name" />
+						</div>
+						<div className="col">
+							<input type="text" className="form-control" placeholder="Last name" />
+						</div>
+						<div className="col-md-2">
+							<input type="text" className="form-control" placeholder="Age" />
+						</div>
 					</div>
-				</div>
-			);
-		}
-
-		return list;
+					<div className="form-group mt-3">
+						<label>General information</label>
+						<textarea className="form-control" placeholder="(where you're from, languages spoken, how long you've played WoW. Anything you like, it's just nice to know a little about the 'real' you!)"></textarea>
+					</div>
+					<div className="form-row pt-3 border-top">
+						<div className="col-4" />
+						<div className="col-4">
+							<input type="text" className="form-control" placeholder="Character name" />
+						</div>
+					</div>
+					<div className="form-row mt-2 pb-3 border-bottom">
+						<div className="col-2" />
+						<div className="col-4">
+							<input type="text" className="form-control" placeholder="Current Guild" />
+						</div>
+						<div className="col-4">
+							<input type="text" className="form-control" placeholder="Previous Guild(s)" />
+						</div>
+					</div>
+					<div className="form-group">
+						<label>Reason(s) for leaving your current/previous guild</label>
+						<textarea className="form-control" placeholder="If applicable"></textarea>
+					</div>
+					<div className="form-group">
+						<label>Reason(s) for wanting to join ARC</label>
+						<textarea className="form-control"></textarea>
+					</div>
+					<div className="form-row mt-2 pb-3">
+						<div className="col-8">
+							<div className="input-group">
+								<div className="input-group-prepend">
+									<div className="input-group-text">
+									<input type="checkbox" />
+									</div>
+								</div>
+								<input type="text" className="form-control" placeholder="Do you already know someone in ARC?" />
+							</div>
+						</div>
+					</div>
+					<div className="form-row mt-2 pb-3">
+						<div className="col text-right">
+							<button className="btn btn-outline-light" type="submit">Apply</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>)
 	}
 
-	function loginView() {
-		if(!online) {
-			return <div className="col text-right">
-				<Link to="/register" className="btn btn-outline-light">Register</Link>
-				<Link to="/login" className="btn btn-outline-light">Login</Link>
-			</div>
-		} else {
-			return <div className="col text-right">
-				<small>You are logged in as {name}</small>
-			</div>
-		}
-	}
-
-	const { status, error, data } = Get("allquiz", "/allquiz");
+	/*const { status, error, data } = Get("allquiz", "/allquiz");
 
 	if (status === "loading") return <Loading />
 
-	if (error) return <span>An error has occurred: {error.message}</span>
+	if (error) return <span>An error has occurred: {error.message}</span>*/
 
-	setAllQuiz(data);
 
-	return <>
-		<div className="row mb-3">
-			<div className="col">
-				<Link to="/newquiz" className="btn btn-outline-light">Create Quiz</Link>
+	return <div>
+		<div className="row">
+			<div className="col text-center">
+				{images()}
 			</div>
-			{loginView()}
 		</div>
-		<Zoom duration={250}>
-			<Fade duration={2000}>
-				<div className="row">
-					<div className="col card-columns">
-						{QuizList()}
-					</div>
-				</div>
-			</Fade>
-        </Zoom>
-	</>;
+		{form()}
+	</div>;
 }
    
 

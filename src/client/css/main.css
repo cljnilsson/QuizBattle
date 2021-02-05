@@ -1,9 +1,6 @@
-.card p{
-    user-select: none;
-}
-
-body {
+body, html {
 	font-family: 'Oswald', sans-serif !important;
+	width: 100%;
 }
 
 ul {
@@ -18,15 +15,10 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
-nav {
-    position: absolute !important;
-    top: 0;
-    width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)) !important;
-}
-
 body {
-	background-image: url("/bg.png");
+	background-image: url("/bg.jpg");
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
 	background-size: cover;
 	color: white;
 }
@@ -45,8 +37,31 @@ button {
 	min-width: 100px;
 }
 
-.shadow {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+.row {
+	width: 100%;
+	margin: auto;
+}
+
+.meme {
+	max-width: 450px;
+}
+
+.class {
+	width: 64px;
+	height: 64px;
+}
+
+.classSelected {
+	filter: invert(1);
+}
+
+.switch-wrapper {
+	position: relative;
+}
+  
+.switch-wrapper > div {
+	position: absolute;
+	width: 100%;
 }
 
 .footer-images img{
@@ -58,67 +73,16 @@ button {
 	border-radius: 0;
 }
 
-.jumbotron {
-    position: absolute;
-    padding-top: 1rem;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 1rem;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    width: 60%;
-    background-color: rgba(0,0,0,.42);
-}
-
-.dropdown-menu {
-	background-color: #343a40;
-}
-
-.dropdown-item {
-	color: white;
-}
-
-.card {
-	transition: transform .1s;
-	width: 250px;
-	color: black;
-}
-
-.card:hover {
-	transform: scale(1.25);
-	z-index: 10000 !important;
-}
-
-.fadeIn {
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: .5s;
-}
-
-@keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
 .container {
 	background-color: rgba(0, 0, 0, 0.9);
-	min-height: 935px;
 	padding-top: 15px;
 	box-shadow: 5px 5px 5px black;
+	min-height: 100vh;
 }
 
-.search-box {
-	width: 450px;
-	height: 100px;
-	position: relative;
-  }
+.scroll {
+	overflow-y: scroll;
+}
   
 .input {
 	position: absolute;
@@ -152,31 +116,9 @@ button {
 	/* Firefox 18- */
 	color: #343a40;
   }
-  
-.searchbtn {
-	position: absolute;
-	width: 80px;
-	height: 80px;
-	background: #343a40;
-	border-radius: 50%;
-	right: 45px;
-	top: 10px;
-	cursor: pointer;
-	text-align: center;
-	line-height: 80px;
-	font-size: 20px;
-	color: #fff;
-	transition: all 0.8s ease;
-}
 
-.input.active {
-	width: 350px;
-	right: 100px;
-}
-  
-.searchbtn.animate {
-	transform: rotate(-360deg);
-	right: 100px;
+.center {
+	transform: translateX(25%);
 }
 
 @media only screen and (max-width: 768px) {
@@ -199,13 +141,5 @@ button {
 		width: 100%;
 		background-color: rgba(0,0,0,.42);
 		max-height: 70%;
-	}
-
-	.chat {
-		height: 300px;
-	}
-
-	.col-2 {
-		max-width: 250px;
 	}
 }

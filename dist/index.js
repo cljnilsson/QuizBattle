@@ -24,7 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = __importDefault(require("./db/core"));
 (async () => {
-    let db = await core_1.default.init();
+    await core_1.default.init();
     Promise.resolve().then(() => __importStar(require("./server.js")));
     Promise.resolve().then(() => __importStar(require("./Routes/routes")));
 })();
