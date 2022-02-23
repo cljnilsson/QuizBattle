@@ -25,7 +25,7 @@ class DBSubscriber {
         }
     }
     static async init() {
-        this.connection = await typeorm_1.createConnection();
+        this.connection = await (0, typeorm_1.createConnection)();
         console.log("Connected to db!");
         return this.connection;
     }

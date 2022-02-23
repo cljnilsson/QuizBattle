@@ -13,26 +13,26 @@ const typeorm_1 = require("typeorm");
 let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 15 }),
+    (0, typeorm_1.Column)({ length: 15 }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column(),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "pass", void 0);
 __decorate([
-    typeorm_1.UpdateDateColumn(),
+    (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], User.prototype, "lastUpdate", void 0);
 __decorate([
-    typeorm_1.CreateDateColumn(),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], User.prototype, "created", void 0);
 User = __decorate([
-    typeorm_1.Entity()
+    (0, typeorm_1.Entity)()
 ], User);
 exports.default = User;

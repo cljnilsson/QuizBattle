@@ -1,0 +1,1 @@
+CREATE table QuizBattle if not exists;

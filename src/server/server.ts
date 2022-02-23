@@ -21,7 +21,7 @@ class Server {
 	_url : string;
 
     get port() {
-        return process.env.PORT || 3000;;
+        return process.env.HPORT || 3000;;
     }
 
     get url() {

@@ -6,7 +6,7 @@ require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const app = express_1.default();
+const app = (0, express_1.default)();
 const adminbro_1 = require("./adminbro");
 app.use(adminbro_1.adminBro.options.rootPath, adminbro_1.router);
 function header(req, res, next) {
@@ -22,7 +22,7 @@ class Server {
         this.startup();
     }
     get port() {
-        return process.env.PORT || 3000;
+        return process.env.HPORT || 3000;
         ;
     }
     get url() {
@@ -33,7 +33,7 @@ class Server {
     middleware() {
         app.use(body_parser_1.default.urlencoded({ extended: false }));
         app.use(header);
-        app.use(helmet_1.default());
+        app.use((0, helmet_1.default)());
         app.use(body_parser_1.default.json());
         app.use(express_1.default.static(__dirname + "/public"));
     }

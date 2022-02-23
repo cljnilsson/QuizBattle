@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  ts-node-docker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    container_name: ts-node-docker
+    expose:
+      - '3000'
+    environment:
+      HOST: db
+    ports:
+      - '3000:3000'
+    command: npm run serv
+    networks:
+      - node-networks
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    restart: always
+    networks:
+      - node-networks
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: 'QuizBattle'
+      MYSQL_ROOT_PASSWORD: ''
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
+networks:
+  node-networks:

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: test-deployment
+    labels:
+        app: my-nginx
+        tier: frontend
+spec:
+    replicas: 1
+    minReadySeconds: 10
+    selector:
+        matchLabels:
+            tier: frontend
+    template:
+        metadata:
+            labels:
+                tier: frontend
+        spec:
+            containers:
+            -   name: frontend-quiz
+                image: derp
+                imagePullPolicy: Never
+                env:
+                -   name: HOST
+                    value: 172.18.112.1
+                -   name: PORT
+                    value: "32000"
+                -   name: PASSWORD
+                    value: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service
+spec:
+  type: NodePort
+  selector:
+    tier: frontend
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+    nodePort: 31000
